@@ -1,0 +1,42 @@
+package com.hfcsbc.osgateway.config;
+
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.reactive.CorsWebFilter;
+import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
+import org.springframework.web.util.pattern.PathPatternParser;
+
+import java.util.Arrays;
+
+/**
+ * @Author CaptainSir
+ * @Email zhaopgfw@dingtalk.com
+ * @Date 2022/3/26
+ * @Desc 跨域
+ */
+@Slf4j
+@Component
+public class CorsConfig {
+
+    /**
+    *  setAllowCredentials 为 true 时, addAllowedOrigin 如果 为 * , cookie 无法传递,因此引入
+     *  setAllowedOriginPatterns 配置 为 * ,会自动根据规则进行处理
+     * CorsFilter 不行，需要用 CorsWebFilter 
+    */
+    @Bean
+    public CorsWebFilter corsFilter() {
+        log.info("CORS限制打开");
+        CorsConfiguration config = new CorsConfiguration();
+//        config.addAllowedOrigin("*");
+        config.addAllowedHeader("*");
+        config.addAllowedMethod("*");
+        config.setAllowCredentials(true);
+        config.setAllowedOriginPatterns(Arrays.asList("*"));
+
+        UrlBasedCorsConfigurationSource configSource = new UrlBasedCorsConfigurationSource(new PathPatternParser());
+        configSource.registerCorsConfiguration("/**", config);
+        return new CorsWebFilter(configSource);
+    }
+}

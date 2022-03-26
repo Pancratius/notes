@@ -1,0 +1,3 @@
+1. Cookie 共享，需要配置多个域名的，需要进行硬编码或配置中心下发，每次只能有一个生效，不允许同时多个生效
+
+2. Access-Control-Allow-Credentials ： true 时， Access-Control-Allow-Origin 不可以为 * ，需要统一第一点来实现或给一个具体的（判断是 equal， 不是 like）
