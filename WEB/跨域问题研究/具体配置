@@ -1,3 +1,47 @@
+前端 HTML  测试 
+
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CORS跨域请求</title>
+    <!--导入Jquery-->
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+</head>
+<body>
+<button id="btn">跨域从服务端获取内容</button>
+<div id="content"></div>
+
+<script>
+    $("#btn").click(function () {
+
+        // 跨域请求
+        $.ajax({
+            type: "post",
+            url: "https://bdfdf.hfcsbc.com",
+            headers: {secret:"value",token: "abc12fdfd3"}
+        });
+
+        // 跨域请求
+        // $.get("http://localhost:8080/cors", function (result) {
+        //     $("#content").append(result).append("<br/>");
+        // });
+        //
+        // // 同域请求
+        // $.get("http://localhost:63342");
+        // $.post("http://localhost:63342");
+    });
+
+</script>
+</body>
+</html> 
+```
+
+后端代码配置
+
+
+```
 package com.hfcsbc.osgateway.config;
 
 import lombok.extern.slf4j.Slf4j;
@@ -40,3 +84,4 @@ public class CorsConfig {
         return new CorsWebFilter(configSource);
     }
 }
+```
